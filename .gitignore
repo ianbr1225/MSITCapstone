@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+build/
+dist/
+.env
+.env.*
+*.joblib
+*.pkl
+.DS_Store
+*.log
