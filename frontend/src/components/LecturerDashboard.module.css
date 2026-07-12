@@ -1,0 +1,204 @@
+/* ── LecturerDashboard styles ──────────────────────────────────────── */
+
+.wrapper {
+  width: 100%;
+  max-width: 720px;
+}
+
+/* ── Header ──────────────────────────────────────────────────────── */
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.subtitle {
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+/* ── Table card ──────────────────────────────────────────────────── */
+
+.tableContainer {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.925rem;
+}
+
+.table thead {
+  background: #f3f4f6;
+}
+
+.table th {
+  text-align: left;
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+  user-select: none;
+}
+
+.table td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.table tbody tr {
+  transition: background 0.15s ease;
+}
+
+/* ── Sortable column headers ─────────────────────────────────────── */
+
+.sortable {
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.sortable:hover {
+  color: var(--color-text);
+}
+
+.sortArrow {
+  font-size: 0.65rem;
+  vertical-align: middle;
+  margin-left: 0.15rem;
+}
+
+/* ── Risk-level row tints ────────────────────────────────────────── */
+
+.rowHigh {
+  background: var(--color-high);
+}
+
+.rowHigh:hover {
+  background: #fbd5d5;
+}
+
+.rowMedium {
+  background: var(--color-medium);
+}
+
+.rowMedium:hover {
+  background: #fde9a3;
+}
+
+.rowLow {
+  background: var(--color-low);
+}
+
+.rowLow:hover {
+  background: #a7f3d0;
+}
+
+/* ── Row entrance animation ──────────────────────────────────────── */
+
+.rowAnimated {
+  animation: fadeSlideIn 0.3s ease both;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Badges ──────────────────────────────────────────────────────── */
+
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badgeHigh {
+  background: rgba(220, 38, 38, 0.12);
+  color: var(--color-high-accent);
+}
+
+.badgeMedium {
+  background: rgba(217, 119, 6, 0.12);
+  color: var(--color-medium-accent);
+}
+
+.badgeLow {
+  background: rgba(5, 150, 105, 0.12);
+  color: var(--color-low-accent);
+}
+
+/* ── Score column ────────────────────────────────────────────────── */
+
+.score {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+/* ── Loading & Error ─────────────────────────────────────────────── */
+
+.statusBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text-muted);
+}
+
+.errorBox {
+  color: var(--color-high-accent);
+}
+
+.errorDetail {
+  font-size: 0.825rem;
+  color: var(--color-text-muted);
+}
+
+/* ── Spinner ─────────────────────────────────────────────────────── */
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-text);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
