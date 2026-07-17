@@ -11,3 +11,4 @@ dist/
 *.pkl
 .DS_Store
 *.log
+.agents/
