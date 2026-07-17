@@ -4,17 +4,21 @@ FastAPI server computing student risk levels from engagement scores.
 """
 
 import sys
+import time
 import logging
 from pathlib import Path
 from typing import Literal
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 # Allow importing sibling modules (risk_engine.py lives next to app/)
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from risk_engine import compute_risk_level  # noqa: E402
+
+logger = logging.getLogger("retainiq")
+logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(title="RetainIQ API", version="0.2.0")
 
@@ -25,6 +29,18 @@ app.add_middleware(
     allow_methods=["GET"],
     allow_headers=["*"],
 )
+
+
+# ── Request-timing middleware ────────────────────────────────────────
+@app.middleware("http")
+async def log_request_time(request: Request, call_next):
+    """Log wall-clock duration for every request (for latency visibility)."""
+    start = time.perf_counter()
+    response = await call_next(request)
+    duration_ms = (time.perf_counter() - start) * 1000
+    logger.info(f"{request.method} {request.url.path} - {duration_ms:.1f}ms")
+    return response
+
 
 # ── Pydantic response model ─────────────────────────────────────────
 class StudentRisk(BaseModel):
