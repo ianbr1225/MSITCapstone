@@ -1,4 +1,4 @@
-# RetainIQ — Backend Development Notes
+# RetainIQ — Development Notes
 
 ## Part A: Core Logic
 
@@ -12,3 +12,8 @@ threshold boundary, invalid input), and what was changed to fix it -->
 
 <!-- REFLECTION NEEDED: briefly note the difference between white-box and
 black-box testing as applied in this project -->
+
+## Part C: Version Control
+
+<!-- REFLECTION NEEDED: explain the two-branch model (main/development) plus
+feature branches, and how tagging/releases support project monitoring -->
