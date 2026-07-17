@@ -1,23 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import styles from './LecturerDashboard.module.css'
+import { sortStudents } from '../utils/sortStudents.js'
 
 const API_URL = 'http://localhost:8000/api/risk-list'
 
-// ── Sorting helpers ─────────────────────────────────────────────────
-const RISK_ORDER = { High: 0, Medium: 1, Low: 2 }
-
-function sortStudents(list, sortKey, ascending) {
-  return [...list].sort((a, b) => {
-    let cmp = 0
-    if (sortKey === 'risk_level') {
-      cmp = RISK_ORDER[a.risk_level] - RISK_ORDER[b.risk_level]
-      if (cmp === 0) cmp = a.name.localeCompare(b.name) // tiebreaker
-    } else if (sortKey === 'name') {
-      cmp = a.name.localeCompare(b.name)
-    }
-    return ascending ? cmp : -cmp
-  })
-}
 
 // ── Component ───────────────────────────────────────────────────────
 export default function LecturerDashboard() {
