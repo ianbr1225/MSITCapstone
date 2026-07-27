@@ -1,2 +1,38 @@
 version: "3.9"
-services: {}
+
+services:
+
+  # ── Postgres database ──────────────────────────────────────────────
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: retainiq_user
+      POSTGRES_PASSWORD: retainiq_pass
+      POSTGRES_DB: retainiq
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U retainiq_user -d retainiq"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── FastAPI backend ────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # Use the service name `db` as the hostname — not `localhost` —
+      # because containers communicate over Docker's internal network.
+      DATABASE_URL: postgresql://retainiq_user:retainiq_pass@db:5432/retainiq
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
