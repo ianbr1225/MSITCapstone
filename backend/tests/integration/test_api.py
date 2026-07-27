@@ -1,18 +1,23 @@
 """
 Black-box / integration tests for the /api/risk-list endpoint.
 Uses FastAPI TestClient — exercises the full request/response cycle.
+
+Test data and DB isolation are provided by conftest.py (SQLite in-memory,
+get_db dependency override). These tests do NOT depend on seed.py or a
+running Postgres instance.
 """
 
 import pytest
 from fastapi.testclient import TestClient
 
-from app.main import app, RAW_STUDENT_DATA, StudentRisk
+from app.main import app, StudentRisk
 from risk_engine import compute_risk_level
 
+# NOTE: `client` fixture is defined in conftest.py — it wires a TestClient
+# to an in-memory SQLite DB seeded with the same 5 students as production.
+# RAW_STUDENT_DATA is no longer imported; the source of truth is now the DB.
 
-@pytest.fixture()
-def client():
-    return TestClient(app)
+EXPECTED_COUNT = 5  # matches TEST_STUDENTS in conftest.py
 
 
 # ── Basic endpoint contract ──────────────────────────────────────────
@@ -26,7 +31,7 @@ def test_risk_list_returns_correct_count(client):
     response = client.get("/api/risk-list")
     data = response.json()
     assert isinstance(data, list)
-    assert len(data) == len(RAW_STUDENT_DATA)
+    assert len(data) == EXPECTED_COUNT
 
 
 def test_risk_list_has_correct_keys(client):
