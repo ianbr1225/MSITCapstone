@@ -67,6 +67,7 @@ TEST_STUDENTS = [
     {"name": "Carmen Rivera",  "engagement_score": 54},   # → Medium
     {"name": "David Okonkwo",  "engagement_score": 18},   # → High
     {"name": "Elena Martinez", "engagement_score": 91},   # → Low
+    {"name": "Farida Hassan",  "engagement_score": 65},   # → Low (boundary: exactly 65, the first Low score)
 ]
 
 

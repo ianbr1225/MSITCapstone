@@ -35,11 +35,12 @@ if engine is None:
 Base.metadata.create_all(bind=engine)
 
 SEED_DATA = [
-    {"name": "Alice Johnson",  "engagement_score": 23},
-    {"name": "Brian Lee",      "engagement_score": 87},
-    {"name": "Carmen Rivera",  "engagement_score": 54},
-    {"name": "David Okonkwo",  "engagement_score": 18},
-    {"name": "Elena Martinez", "engagement_score": 91},
+    {"name": "Alice Johnson",  "engagement_score": 23},  # High
+    {"name": "Brian Lee",      "engagement_score": 87},  # Low
+    {"name": "Carmen Rivera",  "engagement_score": 54},  # Medium
+    {"name": "David Okonkwo",  "engagement_score": 18},  # High
+    {"name": "Elena Martinez", "engagement_score": 91},  # Low
+    {"name": "Farida Hassan",  "engagement_score": 65},  # Low — exactly on the Medium/Low boundary (>=65 → Low)
 ]
 
 

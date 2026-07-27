@@ -14,10 +14,10 @@ from app.main import app, StudentRisk
 from risk_engine import compute_risk_level
 
 # NOTE: `client` fixture is defined in conftest.py — it wires a TestClient
-# to an in-memory SQLite DB seeded with the same 5 students as production.
-# RAW_STUDENT_DATA is no longer imported; the source of truth is now the DB.
+# to an in-memory SQLite DB seeded with 6 students (the 5 original + Farida
+# Hassan at score=65, a boundary case for the Medium/Low threshold).
 
-EXPECTED_COUNT = 5  # matches TEST_STUDENTS in conftest.py
+EXPECTED_COUNT = 6  # matches TEST_STUDENTS in conftest.py (includes Farida Hassan boundary case)
 
 
 # ── Basic endpoint contract ──────────────────────────────────────────
